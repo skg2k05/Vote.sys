@@ -1,0 +1,49 @@
+{
+  "name": "vote-sys",
+  "version": "1.0.0",
+  "description": "Decentralized, Ethereum blockchain-powered e-voting system with smart contract whitelisting and immutable vote recording.",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skg2k05/Vote.sys.git"
+  },
+  "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "chart.js": "^2.8.0",
+    "chartjs-plugin-annotation": "^0.5.7",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.4",
+    "fs-extra": "^7.0.1",
+    "js-cookie": "^2.2.0",
+    "mongoose": "^8.8.0",
+    "next": "^8.0.3",
+    "next-routes": "^1.4.2",
+    "nodemailer": "^6.1.0",
+    "path": "^0.12.7",
+    "react": "^16.8.5",
+    "react-chartjs-2": "^2.7.6",
+    "react-dom": "^16.8.5",
+    "react-helmet": "^5.2.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.86.0",
+    "solc": "0.8.19",
+    "truffle-hdwallet-provider": "^1.0.5",
+    "web3": "^1.10.4"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "ganache": "^7.9.2",
+    "mocha": "^6.1.4"
+  },
+  "scripts": {
+    "chain": "ganache --chain.chainId 1337 --wallet.mnemonic \"myth like bonus scare over problem client lizard pioneer submit female collect\" --logging.quiet",
+    "compile": "node Ethereum/compile.js",
+    "deploy": "node Ethereum/compile.js && node Ethereum/deploy.js",
+    "pretest": "node Ethereum/compile.js",
+    "test": "mocha",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider node server.js"
+  },
+  "license": "MIT"
+}
