@@ -20,7 +20,7 @@ const options = {
 				stacked: true,
 				gridLines: {
 					display: true,
-					color: 'rgba(255,99,132,0.2)',
+					color: 'rgba(83,111,228,0.12)',
 				},
 			},
 		],
@@ -155,11 +155,11 @@ class ContainerExampleContainer extends Component {
 			datasets: [
 				{
 					label: 'Vote Counts',
-					backgroundColor: 'rgba(255,99,132,0.2)',
-					borderColor: 'rgba(255,99,132,1)',
-					borderWidth: 2,
-					hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-					hoverBorderColor: 'rgba(255,99,132,1)',
+					backgroundColor: 'rgba(83,111,228,0.58)',
+					borderColor: 'rgba(83,111,228,1)',
+					borderWidth: 1,
+					hoverBackgroundColor: 'rgba(42,181,157,0.72)',
+					hoverBorderColor: 'rgba(42,181,157,1)',
 					data: this.state.graphVotes,
 				},
 			],

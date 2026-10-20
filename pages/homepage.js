@@ -1,194 +1,98 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
+import { Button, Container, Header, Icon } from 'semantic-ui-react';
 import { Link } from '../routes';
-import {
-	Button,
-	Container,
-	Grid,
-	Header,
-	Icon,
-	Image,
-	Menu,
-	Segment,
-	Visibility,
-} from 'semantic-ui-react';
-import '../static/hometest.css';
 import { Helmet } from 'react-helmet';
-const HomepageHeading = ({ mobile }) => (
-	<Container text className="cont">
-		<Header
-			as="h1"
-			content="A blockchain-based E-voting system, built with love."
-			inverted
-			style={{
-				fontSize: mobile ? '2em' : '3em',
-				fontWeight: 'normal',
-				marginBottom: 0,
-				marginTop: mobile ? '1.5em' : '2em',
-				color: 'black',
-			}}
-		/>
-		<Header
-			as="h4"
-			content="Make your vote count!"
-			inverted
-			style={{
-				fontSize: mobile ? '1.5em' : '1.7em',
-				fontWeight: 'normal',
-				marginTop: mobile ? '0.5em' : '1.5em',
-				color: 'grey',
-			}}
-		/>
-		<div style={{ float: 'left', marginTop: '10%' }}>
-			<Header as="h4" style={{ color: 'grey' }}>
-				Register/ Sign in for the company
-			</Header>
-			<Link route="/company_login">
-				<Button primary size="huge" style={{ color: 'white', backgroundColor: '#627eea' }}>
-					<Icon name="left arrow" />
-					Company
-				</Button>
-			</Link>
+
+const Brand = () => <div className="site-brand"><span className="brand-symbol">✓</span><span>vote<span className="brand-accent">.sys</span></span></div>;
+
+const BallotArtwork = () => (
+	<div className="hero-art" aria-label="Illustration of a verified digital ballot">
+		<div className="hero-art-glow" />
+		<div className="art-ring ring-one" /><div className="art-ring ring-two" />
+		<div className="art-spark spark-a">✦</div><div className="art-spark spark-b">✧</div>
+		<div className="ballot-sheet">
+			<div className="sheet-heading"><span>OFFICIAL BALLOT</span><Icon name="ellipsis horizontal" /></div>
+			<div className="sheet-caption">Choose the candidate you support</div>
+			<div className="ballot-option"><span className="option-avatar avatar-a">JD</span><span className="option-copy"><b>Jordan Davis</b><i /></span><span className="radio" /></div>
+			<div className="ballot-option selected"><span className="option-avatar avatar-b">AM</span><span className="option-copy"><b>Alex Morgan</b><i /></span><span className="radio"><Icon name="check" /></span></div>
+			<div className="ballot-option"><span className="option-avatar avatar-c">SK</span><span className="option-copy"><b>Sam Kim</b><i /></span><span className="radio" /></div>
+			<div className="sheet-confirm"><Icon name="linkify" /> Recorded on the blockchain</div>
 		</div>
-
-		<div style={{ float: 'right', marginTop: '10%' }}>
-			<Header as="h4" style={{ color: 'grey' }}>
-				{' '}
-				Sign in for Voters!
-			</Header>
-			<Link route="/voter_login">
-				<Button primary size="huge" style={{ color: 'white', backgroundColor: '#627eea' }}>
-					Voters
-					<Icon name="right arrow" />
-				</Button>
-			</Link>
-		</div>
-	</Container>
-);
-
-HomepageHeading.propTypes = {
-	mobile: PropTypes.bool,
-};
-
-class DesktopContainer extends Component {
-	state = {};
-
-	hideFixedMenu = () => this.setState({ fixed: false });
-	showFixedMenu = () => this.setState({ fixed: true });
-
-	render() {
-		const { children } = this.props;
-		const { fixed } = this.state;
-
-		return (
-			<div>
-				<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
-				<Helmet>
-					<title>HomePage</title>
-					<link rel="shortcut icon" type="image/x-icon" href="../../static/logo3.png" />
-				</Helmet>
-				<Visibility once={false} onBottomPassed={this.showFixedMenu} onBottomPassedReverse={this.hideFixedMenu}>
-					<Segment inverted textAlign="center" style={{ minHeight: 700, padding: '1em 0em' }} vertical>
-						<Menu
-							fixed={fixed ? 'top' : null}
-							inverted={!fixed}
-							pointing={!fixed}
-							secondary={!fixed}
-							size="large"
-							className="menu"
-						>
-							<Container>
-								<h1
-									style={{
-										color: '#627eea',
-										verticalAlign: 'middle',
-										fontFamily: 'Freestyle Script',
-										fontSize: '400%',
-										paddingLeft: '42%',
-									}}
-								>
-									BlockVotes
-								</h1>
-							</Container>
-						</Menu>
-						<HomepageHeading />
-					</Segment>
-				</Visibility>
-
-				{children}
-			</div>
-		);
-	}
-}
-
-DesktopContainer.propTypes = {
-	children: PropTypes.node,
-};
-
-const ResponsiveContainer = ({ children }) => (
-	<div>
-		<DesktopContainer>{children}</DesktopContainer>
+		<div className="verified-card"><span className="verified-icon">✓</span><span><b>Vote verified</b><small>Recorded securely</small></span></div>
+		<div className="participation-card"><span className="participation-icon"><Icon name="users" /></span><span><b>One voice matters</b><small>Every vote counts</small></span></div>
 	</div>
 );
 
-ResponsiveContainer.propTypes = {
-	children: PropTypes.node,
-};
-
-const HomepageLayout = () => (
-	<ResponsiveContainer>
-		<Segment style={{ padding: '8em 0em' }} vertical>
-			<Grid columns="equal" stackable>
-				<Grid.Row textAlign="center">
-					<Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-						<Header as="h3" style={{ fontSize: '2em' }}>
-							Private
-						</Header>
-						<p style={{ fontSize: '1.33em' }}>
-							Doesn't give any information <br />
-							regarding personal data.
-						</p>
-						<Header as="h3" style={{ fontSize: '2em' }}>
-							Secure
-						</Header>
-						<p style={{ fontSize: '1.33em' }}>
-							Not even a single chance of shutting <br /> down of the system.
-						</p>
-					</Grid.Column>
-					<Image src="/static/ether2.png" width="216" height="256" style={{ paddingTop: '50px' }} />
-
-					<Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-						<Header as="h3" style={{ fontSize: '2em' }}>
-							Decentralized
-						</Header>
-						<p style={{ fontSize: '1.33em' }}>
-							Decentralized technology gives you the <br /> power to store your assets in a network.
-						</p>
-						<Header as="h3" style={{ fontSize: '2em' }}>
-							Immutable
-						</Header>
-						<p style={{ fontSize: '1.33em' }}>
-							Keeps its ledgers in a never-ending <br /> state of forwarding momentum.
-						</p>
-					</Grid.Column>
-				</Grid.Row>
-			</Grid>
-		</Segment>
-
-		<Segment inverted vertical style={{ padding: '5em 0em', backgroundColor: '#627eea' }}>
-			<Container>
-				<Header as="h3" style={{ fontSize: '2em', color: 'white', textAlign: 'center' }}>
-					A fascinating quote
-				</Header>
-				<p style={{ fontSize: '1.33em', textAlign: 'center', fontStyle: 'Italic' }}>
-					"We have elected to put our money and faith in a mathematical framework that is free of politics and
-					human error."
-				</p>
-				<Header as="h2" style={{ fontSize: '1.33em', color: 'white', textAlign: 'center' }}>
-					Tyler Winklevoss
-				</Header>
+const Homepage = () => (
+	<div className="landing-page">
+		<Helmet>
+			<title>Vote.sys — Your voice, counted.</title>
+			<meta name="description" content="A secure, transparent digital voting experience. Make your voice count with Vote.sys." />
+			<link rel="shortcut icon" type="image/x-icon" href="../../static/logo3.png" />
+		</Helmet>
+		<header className="site-nav">
+			<Container className="nav-inner">
+				<Link route="/homepage"><a className="brand-link"><Brand /></a></Link>
+				<nav className="nav-links" aria-label="Main navigation">
+					<a href="#how-it-works">How it works</a><a href="#why-votesys">Why Vote.sys</a>
+				</nav>
+				<div className="nav-actions">
+					<Link route="/company_login"><a className="nav-admin">Election admin</a></Link>
+					<Link route="/voter_login"><Button className="nav-vote">Voter sign in <Icon name="arrow right" /></Button></Link>
+				</div>
 			</Container>
-		</Segment>
-	</ResponsiveContainer>
+		</header>
+
+		<main>
+			<section className="hero-section">
+				<div className="hero-backdrop" />
+				<Container className="hero-grid">
+					<div className="hero-copy">
+						<div className="trust-label"><span className="trust-dot" /> A clearer way to make your voice heard</div>
+						<h1>Your voice.<br /><span>Your vote.</span><br />Your future.</h1>
+						<p className="hero-description">Take part in the decisions that matter. Vote.sys brings secure, transparent digital voting into one simple experience.</p>
+						<div className="hero-actions">
+							<Link route="/voter_login"><Button className="hero-primary">Go to voter sign in <Icon name="arrow right" /></Button></Link>
+							<a href="#how-it-works" className="hero-secondary"><span><Icon name="play" /></span> See how it works</a>
+						</div>
+						<div className="hero-assurance"><span className="assurance-icon"><Icon name="check" /></span><span><b>One vote per wallet</b><small>Registered voters only.</small></span><i className="assurance-divider" /><span><b>Recorded on-chain</b><small>Verifiable election records.</small></span></div>
+					</div>
+					<BallotArtwork />
+				</Container>
+				<div className="hero-bottom"><Container><span>BUILT FOR TRUSTED PARTICIPATION</span><span className="hero-bottom-line"/><span><Icon name="lock" /> SECURE&nbsp;&nbsp;·&nbsp;&nbsp; TRANSPARENT&nbsp;&nbsp;·&nbsp;&nbsp; ACCESSIBLE</span></Container></div>
+			</section>
+
+			<section id="why-votesys" className="benefits-section">
+				<Container>
+					<div className="section-heading"><p className="section-kicker">CONFIDENCE IN EVERY CHOICE</p><Header as="h2">Voting should feel simple.<br /><span>Trust should come naturally.</span></Header><p>Thoughtful technology helps make the process clear from sign in to final submission.</p></div>
+					<div className="benefit-grid">
+						<article className="benefit-card"><div className="benefit-icon indigo"><Icon name="user outline" /></div><h3>One vote per wallet</h3><p>Only registered wallet addresses can vote, and each eligible address can vote once.</p><span className="benefit-index">01</span></article>
+						<article className="benefit-card"><div className="benefit-icon teal"><Icon name="check circle outline" /></div><h3>Transparent records</h3><p>Votes are recorded on the blockchain for a clear, verifiable election history.</p><span className="benefit-index">02</span></article>
+						<article className="benefit-card"><div className="benefit-icon amber"><Icon name="mouse pointer" /></div><h3>Easy to take part</h3><p>Sign in, review your candidates, and submit your choice in a few clear steps.</p><span className="benefit-index">03</span></article>
+					</div>
+				</Container>
+			</section>
+
+			<section id="how-it-works" className="how-section">
+				<Container className="how-grid">
+					<div className="how-copy"><p className="section-kicker">A CLEAR, GUIDED FLOW</p><Header as="h2">From invitation<br />to <span>vote recorded.</span></Header><p>Everything you need to participate, right where you expect it.</p><Link route="/voter_login"><Button className="how-link">Continue to voter sign in <Icon name="arrow right" /></Button></Link></div>
+					<div className="steps-list">
+						<div className="step-row"><div className="step-number">01</div><div><h3>Sign in securely</h3><p>Use the voter email and password provided by your election authority.</p></div><Icon name="sign in" /></div>
+						<div className="step-row"><div className="step-number">02</div><div><h3>Review your candidates</h3><p>Read candidate information before making your choice.</p></div><Icon name="address card outline" /></div>
+						<div className="step-row"><div className="step-number">03</div><div><h3>Cast your vote</h3><p>Confirm with your connected wallet and receive an on-chain record.</p></div><Icon name="check circle outline" /></div>
+					</div>
+				</Container>
+			</section>
+
+			<section className="admin-cta"><Container><div className="cta-mark"><Icon name="building outline" /></div><div><p className="section-kicker">RUNNING AN ELECTION?</p><h2>Bring your election online.</h2><p>Set up an election, manage candidates, and invite eligible voters.</p></div><Link route="/company_login"><Button className="cta-button">Election admin sign in <Icon name="arrow right" /></Button></Link></Container></section>
+		</main>
+
+		<footer className="site-footer"><Container><Link route="/homepage"><a className="brand-link"><Brand /></a></Link><span>Digital participation, built on trust.</span><span>© {new Date().getFullYear()} Vote.sys</span></Container></footer>
+
+		<style jsx global>{`
+			*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:#182343;font-family:Inter,'Avenir Next',Avenir,'Segoe UI',sans-serif}.landing-page{overflow:hidden}.landing-page a{color:inherit}.site-nav{height:78px;position:relative;z-index:5;background:rgba(255,255,255,.92);border-bottom:1px solid #edf0f7}.nav-inner{height:100%;display:flex!important;align-items:center;justify-content:space-between}.brand-link{text-decoration:none!important}.site-brand{display:flex;align-items:center;gap:10px;color:#19264c;font-size:19px;font-weight:800;letter-spacing:-.7px}.brand-accent{color:#6078ec}.brand-symbol{width:31px;height:31px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;color:#fff;background:linear-gradient(145deg,#6480f5,#4862dc);font-size:13px;box-shadow:0 6px 13px rgba(70,95,220,.2)}.nav-links,.nav-actions{display:flex;align-items:center;gap:30px}.nav-links a,.nav-admin{color:#65708c!important;text-decoration:none;font-size:12px;font-weight:600;transition:color .2s}.nav-links a:hover,.nav-admin:hover{color:#4f6fe5!important}.nav-vote.ui.button{margin:0;padding:12px 16px;border-radius:8px;color:#fff;background:#536fe4;font-size:11px;box-shadow:0 7px 16px rgba(83,111,228,.18);transition:transform .2s,box-shadow .2s}.nav-vote.ui.button:hover,.hero-primary.ui.button:hover,.cta-button.ui.button:hover{color:#fff;background:#405ed5;transform:translateY(-2px);box-shadow:0 10px 20px rgba(83,111,228,.24)}.nav-vote i{margin-left:8px}.hero-section{position:relative;min-height:644px;padding:74px 0 62px;background:linear-gradient(180deg,#f8faff 0%,#fff 100%)}.hero-backdrop{position:absolute;width:720px;height:720px;right:-150px;top:-420px;border:1px solid #eef1ff;border-radius:50%;box-shadow:0 0 0 65px rgba(238,241,255,.46),0 0 0 130px rgba(238,241,255,.22);pointer-events:none}.hero-grid{position:relative;display:grid!important;grid-template-columns:1fr 1fr;align-items:center;gap:20px;min-height:445px}.hero-copy{z-index:1;max-width:510px;animation:fade-up .8s both}.trust-label{display:inline-flex;align-items:center;gap:8px;padding:8px 11px;border:1px solid #e4e9fa;border-radius:24px;color:#687493;background:rgba(255,255,255,.8);font-size:10px;font-weight:650}.trust-dot{width:7px;height:7px;border-radius:50%;background:#23b99b;box-shadow:0 0 0 4px #e3f8f2}.hero-copy h1{margin:23px 0 16px;color:#182343;font-size:clamp(46px,5.2vw,67px);font-weight:750;line-height:.99;letter-spacing:-3.6px}.hero-copy h1 span{color:#5c75e9}.hero-description{max-width:450px;margin:0;color:#737e98;font-size:14px;line-height:1.85}.hero-actions{display:flex;align-items:center;gap:22px;margin-top:27px}.hero-primary.ui.button{margin:0;padding:15px 19px;border-radius:9px;color:white;background:linear-gradient(100deg,#5f79ee,#4967df);font-size:12px;box-shadow:0 9px 18px rgba(73,100,220,.2);transition:all .2s}.hero-primary i{margin-left:11px}.hero-secondary{display:inline-flex;align-items:center;gap:9px;color:#586681!important;text-decoration:none;font-size:11px;font-weight:700}.hero-secondary>span{width:27px;height:27px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #e4e8f3;border-radius:50%;color:#5771e2;background:#fff;font-size:9px;transition:transform .2s}.hero-secondary:hover>span{transform:scale(1.1)}.hero-assurance{display:flex;align-items:center;gap:11px;margin-top:33px}.assurance-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:10px;color:#34a992;background:#e9f8f4}.hero-assurance b,.hero-assurance small{display:block}.hero-assurance b{color:#374363;font-size:9px}.hero-assurance small{margin-top:3px;color:#929bb0;font-size:8px}.assurance-divider{height:24px;width:1px;margin:0 6px;background:#e5e9f2}.hero-art{height:445px;position:relative;animation:fade-up .8s .12s both}.hero-art-glow{position:absolute;width:330px;height:330px;left:80px;top:62px;border-radius:50%;background:radial-gradient(circle,rgba(111,137,248,.19),rgba(111,137,248,0) 68%);filter:blur(4px)}.art-ring{position:absolute;left:50%;top:50%;border:1px solid rgba(103,125,221,.14);border-radius:50%;transform:translate(-50%,-50%) rotate(-22deg)}.ring-one{width:470px;height:220px}.ring-two{width:390px;height:315px;transform:translate(-50%,-50%) rotate(29deg)}.ballot-sheet{position:absolute;z-index:2;width:280px;left:50%;top:50%;padding:22px 23px 16px;border:1px solid rgba(255,255,255,.9);border-radius:17px;background:rgba(255,255,255,.95);box-shadow:0 28px 65px rgba(38,55,116,.17),0 5px 16px rgba(38,55,116,.07);transform:translate(-50%,-50%) rotate(-4deg);animation:float-card 5.5s ease-in-out infinite}.sheet-heading{display:flex;align-items:center;justify-content:space-between;color:#34436d;font-size:9px;font-weight:800;letter-spacing:1.2px}.sheet-heading :global(i){color:#9aa6c5}.sheet-caption{margin:7px 0 14px;color:#9aa2b8;font-size:9px}.ballot-option{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid #f0f2f8}.option-avatar{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:9px;color:#4d64b9;background:#e9edff;font-size:8px;font-weight:800}.avatar-b{color:#268f82;background:#e0f5ef}.avatar-c{color:#ad7b29;background:#fff1d8}.option-copy{flex:1}.option-copy b{display:block;color:#3e4968;font-size:9px}.option-copy i{display:block;width:53px;height:4px;margin-top:5px;border-radius:4px;background:#e7eaf2}.radio{width:15px;height:15px;display:flex;align-items:center;justify-content:center;border:1px solid #d8deeb;border-radius:50%;color:#fff;font-size:7px}.selected .radio{border-color:#5470e2;background:#5470e2}.selected .option-copy i{width:77px;background:#9aaafa}.sheet-confirm{margin-top:11px;padding:9px;border-radius:7px;color:#63718c;background:#f5f7fc;text-align:center;font-size:8px}.sheet-confirm :global(i){margin-right:5px;color:#38aa94}.verified-card,.participation-card{position:absolute;z-index:3;display:flex;align-items:center;gap:9px;padding:11px 14px;border:1px solid rgba(230,235,249,.9);border-radius:12px;background:rgba(255,255,255,.94);box-shadow:0 13px 35px rgba(42,57,107,.13);animation:float-badge 4.5s ease-in-out infinite}.verified-card{top:61px;right:7px}.participation-card{bottom:53px;left:0;animation-delay:.5s}.verified-card b,.verified-card small,.participation-card b,.participation-card small{display:block}.verified-card b,.participation-card b{color:#364362;font-size:9px}.verified-card small,.participation-card small{margin-top:3px;color:#929bb0;font-size:8px}.verified-icon,.participation-icon{width:27px;height:27px;display:flex;align-items:center;justify-content:center;border-radius:8px;color:#fff;background:#28b899;font-size:10px}.participation-icon{color:#536fe4;background:#edf0ff}.art-spark{position:absolute;z-index:1;color:#8298ef;animation:sparkle 2.8s ease-in-out infinite alternate}.spark-a{left:38px;top:103px;font-size:23px}.spark-b{right:45px;bottom:110px;font-size:29px;animation-delay:.7s}.hero-bottom{position:absolute;bottom:0;left:0;width:100%;border-top:1px solid #eef1f7}.hero-bottom :global(.ui.container){height:48px;display:flex;align-items:center;gap:15px;color:#99a2b7;font-size:8px;font-weight:750;letter-spacing:1.1px}.hero-bottom-line{flex:1;height:1px;background:#e7eaf2}.hero-bottom :global(i){color:#647de9}.benefits-section{padding:91px 0 100px;background:#fff}.section-heading{text-align:center}.section-kicker{margin:0 0 13px;color:#6078e7;font-size:9px;font-weight:800;letter-spacing:1.8px}.section-heading :global(h2.ui.header),.how-copy :global(h2.ui.header){margin:0;color:#1b2747;font-size:35px;font-weight:720;line-height:1.2;letter-spacing:-1.25px}.section-heading :global(h2 span),.how-copy :global(h2 span){color:#6078e7}.section-heading>p:last-child{margin:13px auto 0;color:#8790a6;font-size:12px}.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:43px}.benefit-card{position:relative;min-height:197px;padding:24px 24px 22px;border:1px solid #edf0f7;border-radius:14px;background:#fff;box-shadow:0 8px 24px rgba(36,51,99,.035);transition:transform .24s,box-shadow .24s,border-color .24s}.benefit-card:hover{transform:translateY(-5px);border-color:#e0e6ff;box-shadow:0 17px 34px rgba(36,51,99,.08)}.benefit-icon{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:11px;font-size:15px}.benefit-icon.indigo{color:#5872e4;background:#eff1ff}.benefit-icon.teal{color:#29ad96;background:#e9f8f4}.benefit-icon.amber{color:#cf9842;background:#fff6e9}.benefit-card h3{margin:17px 0 8px;color:#293655;font-size:14px}.benefit-card p{max-width:285px;margin:0;color:#858ea4;font-size:10px;line-height:1.8}.benefit-index{position:absolute;right:22px;top:23px;color:#d5dbea;font-size:10px;font-weight:800}.how-section{padding:76px 0;background:#f7f8fc}.how-grid{display:grid!important;grid-template-columns:.8fr 1.2fr;gap:95px;align-items:center}.how-copy :global(h2.ui.header){font-size:37px}.how-copy>p:not(.section-kicker){max-width:290px;margin:15px 0 20px;color:#838da4;font-size:12px;line-height:1.75}.how-link.ui.button{padding:12px 0;color:#526ee1;background:transparent;font-size:11px}.how-link.ui.button:hover{color:#304fc9;background:transparent}.how-link i{margin-left:9px}.steps-list{border-top:1px solid #e6eaf2}.step-row{display:flex;align-items:center;gap:18px;padding:18px 0;border-bottom:1px solid #e6eaf2}.step-number{width:35px;height:35px;display:flex;align-items:center;justify-content:center;border:1px solid #e3e8fb;border-radius:11px;color:#6078e7;background:#fff;font-size:9px;font-weight:800}.step-row div:nth-child(2){flex:1}.step-row h3{margin:0 0 5px;color:#35415e;font-size:12px}.step-row p{margin:0;color:#8a93a8;font-size:10px}.step-row> :global(i){color:#aab4ce;font-size:16px}.admin-cta{padding:37px 0;background:linear-gradient(110deg,#f1f3ff,#f5fbfa)}.admin-cta :global(.ui.container){display:flex;align-items:center;gap:17px}.cta-mark{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #e4e8fb;border-radius:13px;color:#5c76e6;background:#fff;font-size:16px}.admin-cta .section-kicker{margin-bottom:5px;font-size:8px}.admin-cta h2{margin:0;color:#293654;font-size:16px}.admin-cta p:not(.section-kicker){margin:5px 0 0;color:#858ea4;font-size:10px}.cta-button.ui.button{margin-left:auto;padding:13px 16px;border-radius:8px;color:#fff;background:#536fe4;font-size:10px;transition:all .2s}.cta-button i{margin-left:8px}.site-footer{padding:21px 0;border-top:1px solid #edf0f6}.site-footer :global(.ui.container){display:flex;align-items:center;justify-content:space-between}.site-footer .site-brand{font-size:14px}.site-footer .brand-symbol{width:25px;height:25px;border-radius:8px;font-size:10px}.site-footer> :global(.ui.container)>span{color:#9aa2b5;font-size:9px}.site-footer> :global(.ui.container)>span:last-child{font-size:9px}@keyframes fade-up{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}@keyframes float-card{0%,100%{transform:translate(-50%,-50%) rotate(-4deg)}50%{transform:translate(-50%,calc(-50% - 9px)) rotate(-2deg)}}@keyframes float-badge{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@keyframes sparkle{from{opacity:.45;transform:scale(.8) rotate(-12deg)}to{opacity:1;transform:scale(1.15) rotate(12deg)}}@media(max-width:900px){.hero-section{padding-top:50px}.hero-grid{grid-template-columns:1fr 1fr;gap:0}.hero-copy h1{font-size:52px}.hero-description{font-size:12px}.hero-art{transform:scale(.87)}.how-grid{gap:48px}}@media(max-width:760px){.site-nav{height:68px}.nav-links,.nav-admin{display:none}.nav-vote.ui.button{padding:11px 13px}.hero-section{padding:44px 0 64px}.hero-grid{grid-template-columns:1fr;gap:8px}.hero-copy{padding:0 5px}.hero-copy h1{font-size:52px;letter-spacing:-2.7px}.hero-description{max-width:440px}.hero-art{height:355px;margin-top:0;transform:scale(.88);transform-origin:center top}.hero-bottom :global(.ui.container){gap:9px;font-size:7px}.hero-bottom :global(.ui.container)>span:first-child{display:none}.benefits-section{padding:65px 0}.section-heading :global(h2.ui.header){font-size:29px}.benefit-grid{grid-template-columns:1fr;gap:11px;margin-top:30px}.benefit-card{min-height:150px;padding:19px}.benefit-card h3{margin-top:11px}.benefit-card p{max-width:100%}.how-section{padding:57px 0}.how-grid{grid-template-columns:1fr;gap:28px}.how-copy :global(h2.ui.header){font-size:32px}.step-row{gap:13px}.step-row p{line-height:1.5}.admin-cta :global(.ui.container){flex-wrap:wrap}.admin-cta .cta-mark{display:none}.cta-button.ui.button{margin:13px 0 0}.site-footer :global(.ui.container)>span:nth-child(2){display:none}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+		`}</style>
+	</div>
 );
-export default HomepageLayout;
+
+export default Homepage;

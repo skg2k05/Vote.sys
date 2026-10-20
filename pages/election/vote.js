@@ -210,42 +210,18 @@ class VotePage extends Component {
 					<Grid stackable style={{ marginTop: '1.5em' }}>
 						<Grid.Row>
 							<Grid.Column width={3}>
-								<Menu
-									vertical
-									icon="labeled"
-									style={{
-										width: '100%',
-										minHeight: '350px',
-										backgroundColor: '#ffffff',
-										borderRadius: '8px',
-										boxShadow: '0 2px 10px rgba(0,0,0,0.06)',
-										border: '1px solid #e2e8f0',
-									}}
-								>
-									<Menu.Item header style={{ color: '#2d3748', textAlign: 'center', padding: '20px 10px' }}>
-										<h3 style={{ margin: 0, letterSpacing: '1px', fontWeight: 'bold' }}>VOTER MENU</h3>
-									</Menu.Item>
+								<Menu vertical className="workspace-sidebar voter-sidebar">
+									<Menu.Item header className="sidebar-heading"><span>VOTER WORKSPACE</span><small>Election participation</small></Menu.Item>
 									<Menu.Item
 										active
-										style={{
-											color: '#2185d0',
-											fontWeight: 'bold',
-											backgroundColor: '#f0f7fd',
-											padding: '16px 10px',
-										}}
+										className="sidebar-link active"
 									>
 										<Icon name="check square outline" size="large" />
 										Cast Vote
 									</Menu.Item>
 									<Menu.Item
 										onClick={this.signOut}
-										style={{
-											cursor: 'pointer',
-											color: '#e53e3e',
-											padding: '16px 10px',
-											marginTop: '40px',
-											borderTop: '1px solid #edf2f7',
-										}}
+										className="sidebar-link sidebar-signout"
 									>
 										<Icon name="sign out" size="large" />
 										Sign Out
